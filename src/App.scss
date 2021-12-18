@@ -1,0 +1,31 @@
+
+.bgColor{
+    background: hsla(222, 51%, 34%, 1);
+
+    background: linear-gradient(315deg, hsla(222, 51%, 34%, 1) 0%, hsla(119, 37%, 45%, 1) 100%);
+    
+    background: -moz-linear-gradient(315deg, hsla(222, 51%, 34%, 1) 0%, hsla(119, 37%, 45%, 1) 100%);
+    
+    background: -webkit-linear-gradient(315deg, hsla(222, 51%, 34%, 1) 0%, hsla(119, 37%, 45%, 1) 100%);
+    
+}
+.login{
+    height:100vh;
+}
+.bgColor1{
+    background: hsla(222, 47%, 23%, 1);
+
+    background: linear-gradient(315deg, hsla(222, 47%, 23%, 1) 0%, hsla(104, 100%, 9%, 1) 100%);
+
+    background: -moz-linear-gradient(315deg, hsla(222, 47%, 23%, 1) 0%, hsla(104, 100%, 9%, 1) 100%);
+
+    background: -webkit-linear-gradient(315deg, hsla(222, 47%, 23%, 1) 0%, hsla(104, 100%, 9%, 1) 100%);
+    padding: 30px;
+    border-radius: 20px;
+}
+.center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
