@@ -6,6 +6,7 @@ from typing import List
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from starlette.responses import Response
 import crud, model, schema, database
 
 
@@ -42,12 +43,13 @@ def get_db():
 def index():
     return {"hello im ":"chauncey"}
 
-@app.post("/users/", response_model=schema.User)
-def create_user(user: schema.UserCreate, db: Session = Depends(get_db)):
+@app.post("/users/", response_model=schema.User, response_class=Response)
+async def create_user(user: schema.UserCreate, db: Session = Depends(get_db)):
     db_user = crud.getUserByEmail(db, email=user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     return crud.createUser(db=db, user=user)
+
 
 
 @app.get("/users/", response_model=List[schema.User])
@@ -64,17 +66,17 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     return db_user
 
 
-@app.post("/users/{user_id}/items/", response_model=schema.Favorite)
+@app.post("/users/{user_id}/favorites/", response_model=schema.Favorite)
 def create_item_for_user(
-    user_id: int, item: schema.FavoriteCreate, db: Session = Depends(get_db)
+    user_id: int, favorite: schema.FavoriteCreate, db: Session = Depends(get_db)
 ):
-    return crud.createUserFavorite(db=db, item=item, user_id=user_id)
+    return crud.createUserFavorite(db=db, favorite=favorite, user_id=user_id)
 
 
-@app.get("/items/", response_model=List[schema.Favorite])
+@app.get("/favorites/", response_model=List[schema.Favorite])
 def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    items = crud.getFavorite(db, skip=skip, limit=limit)
-    return items
+    favorites = crud.getFavorite(db, skip=skip, limit=limit)
+    return favorites
 
 
 

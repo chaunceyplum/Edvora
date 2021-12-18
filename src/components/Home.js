@@ -11,8 +11,50 @@ const Home = (props) => {
     
     const [pokemon, setPokemon] = useState([])
     const [search, setSearch] = useState('') 
+    const [ favorite, setFavorite] =useState('')
        
-    
+    useEffect(() => {
+        axios.get("https://pokeapi.co/api/v2/pokemon?limit=150",{
+            method:'GET',
+            mode:'cors',
+            headers: {
+                'Content-Type' : 'application/json'
+            } 
+        })
+        .then((res) => {
+            const data = res.data.results
+            return data
+            
+        })
+        .then((res) => {
+            setPokemon(res)
+            
+        })
+        
+    }, [])
+
+
+    const makeFavorite =(obj) => {
+        setFavorite(obj.name)
+
+        axios.post(`http://http://127.0.0.1:8000/users/1/favorites`,{
+            method:'POST',
+            mode:'cors',
+            headers: {
+                'Content-Type' : 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            body: {
+                
+                    
+                      "title": `${favorite}`,
+                      "id": 1,
+                      "owner_id": 1
+                    
+                
+            } 
+        })
+    }
     
     
     return (
@@ -45,18 +87,24 @@ const Home = (props) => {
                         })
                         .map((obj,i) => {
                             return(
-                                <div key={i}>
+                                <div key={i} xs={3}>
                                     <Card className='bgColor1'>
                                         <CardHeader>
                                             <CardTitle className="center text-white">
                                                 {obj.name}
                                             </CardTitle>
+                                            
                                         </CardHeader>
                                         <CardBody>
                                             <DisplayPic obj={obj}/>
-                                            <Button>
-                                                <BsHeart />
-                                            </Button>
+                                            <Col />
+                                            <Col className ='center'>
+                                                <Button className='bgColor center' onSubmit={makeFavorite}>
+                                                    <BsHeart  className='center'/>
+                                                </Button>
+                                            </Col>
+                                            <Col />
+                                            
                                         </CardBody>
                                     </Card>
                                     <br />

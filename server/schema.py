@@ -7,6 +7,9 @@ from pydantic import BaseModel
 class FavoriteBase(BaseModel):
     title:str
 
+    class Config:
+        orm_mode =True
+
 class FavoriteCreate(FavoriteBase):
     pass
 
@@ -18,10 +21,17 @@ class Favorite(FavoriteBase):
         orm_mode = True
 
 class UserBase(BaseModel):
+
     email:str
+    
+    class Config:
+        orm_mode =True
 
 class UserCreate(UserBase):
-    password:str
+    hashed_password:str
+
+    class Config:
+        orm_mode =True
 
 class User(UserBase):
     id:int

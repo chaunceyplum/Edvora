@@ -24,4 +24,4 @@ class favoriteModel(database.Base):
     name = Column(String, index=True)
     owner_id =Column(Integer, ForeignKey("users.id"))
 
-    owner = relationship("UserModel", back_populates="favorites")
+    owner = relationship("UserModel", back_populates="favorite")

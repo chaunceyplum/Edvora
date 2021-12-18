@@ -7,11 +7,14 @@ from sqlalchemy.orm import sessionmaker
 
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///sql.db"
+# SQLALCHEMY_DATABASE_URL = "postgresql://chaunceyplummer:thenorthface@localhost:3300/chaunceys_data"
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+    SQLALCHEMY_DATABASE_URL ,
+    connect_args={"check_same_thread": False}
 )
 
 SessionLocal =sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base =declarative_base()
+
