@@ -53,16 +53,16 @@ const Login = () => {
 
     const handleChange = (user, authName) =>{
        
-    //    authName == user.email &&
-    //     setUrl(false)
+        authName == "blah@gmail.com" &&
+
+        setUrl(!url)
        
-       console.log(authName)
-       console.log(user)
+       
        
        
         
     }
-    const attributes = url ? {href:'/home'} : {href:'/'}
+    
     
 
     return (
@@ -71,7 +71,7 @@ const Login = () => {
            
                 <div className='bgColor center login'>
                 <div className='bgColor1 center'>
-                    <form onSubmit={handleChange(user, authName)} >
+                    <form onSubmit={handleChange} >
                         
                         <Row className="center">
                             <h1 className="center text-white">
@@ -101,9 +101,17 @@ const Login = () => {
 
                             {/* <Col /> */}
                             <Col xs={6} className='center'>
-                                <Button type="submit" {...attributes} value="submit" variant='primary' className='bgColor !important'>
-                                    Submit
-                                </Button>
+                               {
+                                   url ?
+
+                                    <Button type="submit"  ohref='/login' value="submit" variant='primary' className='bgColor !important'>
+                                        Submit
+                                    </Button>
+                                :
+                                    <Button type="submit"  href='/home' value="submit" variant='primary' className='bgColor !important'>
+                                        Submit
+                                    </Button>
+                               }
                             </Col>
                             {/* <Col xs={6 } className='center'>
                                 <Button href="/signup" variant='primary' className='bgColor !important'>

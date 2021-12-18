@@ -8,13 +8,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from starlette.responses import Response
 import crud, model, schema, database
+from fastapi.security import OAuth2PasswordBearer
 
 
-
-
-database.Base.metadata.create_all(bind=database.engine)
 
 app =FastAPI()
+
+
+
 origins = [
     "http://localhost:3000",
     "https://localhost:3000",
